@@ -4,11 +4,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+double sines[1000];
+int primes[1000];
 
-int *prime_table ( int prime_num )
+ void prime_table ( int prime_num )
 {
   int i,j,p,prime;
-  int primes[1000];
   i = 2;
   p = 0;
   while ( p <prime_num )
@@ -29,14 +30,12 @@ int *prime_table ( int prime_num )
     }
     i = i + 1;
   }
-  return primes;
 }
-double *sine_table ( int sine_num )
+
+void sine_table ( int sine_num )
 {
-  double a;
   int i,j;
-  double sines[10000];
-  double pi = 3.141592653589793;
+  double a,pi = 3.141592653589793;
   for ( i = 0; i<sine_num; i++ )
   {
     sines[i] = 0.0;
@@ -46,29 +45,27 @@ double *sine_table ( int sine_num )
       sines[i] = sines[i] + sin ( a );
     }
   }
-  return sines;
 }
-int main(){
-	int size,z,x,y;
+
+void main(){
+	int size,z,y;
+	printf("Enter the the number of primes and sine table values required : \n");
 	scanf("%d",&size);
 	#pragma omp parallel sections
 	{
 		#pragma omp section
 		{
-			int *a =(int*)malloc(size*sizeof(int));
-			a=prime_table(size);
+			prime_table(size);
 			for( y=0;y<size;y++){
-				printf("%d\n",a[y]);
+				printf("%d \n",primes[y]);
 			}
 		}
 		#pragma omp section
 		{
-			double *b=(double*)malloc(size*sizeof(double));
-			b=sine_table(size);
+			sine_table(size);
 			for( z=0;z<size;z++){
-				printf("%lf \n",b[z]);
+				printf("%lf \n",sines[z]);
 			}
 		}
 	}
-	return 0;
 }
