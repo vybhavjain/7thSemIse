@@ -41,12 +41,10 @@ int mid;
 mid = (l+r)/2;
 #pragma omp section
 {
-//printf("thread id = %d\t l=%d\t mid=%d\n",omp_get_thread_num(),l,mid);
 mergesort(a, l, mid);
 }
 #pragma omp section
 {
-//printf("thread id = %d\t r=%d\t mid+1=%d\n",omp_get_thread_num(),r,mid+1);
 mergesort(a, mid+1, r);
 }
 }
@@ -57,11 +55,7 @@ int main()
 {
 omp_set_nested(1);
 int start=1;
-int i,j;
-/*a=(int*)malloc(100*sizeof(int));
-for(inti = 0; i<100; i++)
-a[i] = rand()%1000;
-mergesort(a,0,99);*/
+int i,j,k;
 printf("\n\nInput Size\t1\t2\t4\t8\t");
 for(i = 0; i<4; i++)
 {
@@ -73,9 +67,9 @@ for(j = 0; j<size; j++)
 a[j] = rand()%100000;
 }
 printf("\n\n%d\t",size);
-for(i = 0; i<4; i++)
+for(k = 0; k<4; k++)
 {
-omp_set_num_threads(2*(i));
+omp_set_num_threads(2*(k));
 double t1 = omp_get_wtime();
 mergesort(a,0,size-1);
 double t2 = omp_get_wtime();
