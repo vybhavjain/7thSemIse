@@ -1,19 +1,21 @@
+//Search F(J) = C
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 #include<mpi.h>
 
-int f(int i){
-    
-    int value = i * i;
-       
+int f(int i)
+{
+    int value = i * i;       
     return value;
 }
 
-int search(int a, int b, int c, int id, int p){
+int search(int a, int b, int c, int id, int p)
+{
     int fi,i,j=-1;
-    
-    for(i=a+id;0<i&&i<=b;i+=p){
+    for(i=a+id;0<i&&i<=b;i+=p)
+	{
         fi=f(i);
         if(fi==c){
             j=i;
@@ -24,7 +26,8 @@ int search(int a, int b, int c, int id, int p){
 }
 
 
-void main(int argc, char* argv[]){
+void main(int argc, char* argv[])
+{
     int a,b,c,id,j,p;
     double wtime;
     
