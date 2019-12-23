@@ -1,3 +1,5 @@
+//Monto Carlo algorithm
+
 #include<stdio.h>
 #include<mpi.h>
 #include<stdlib.h>

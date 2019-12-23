@@ -1,14 +1,13 @@
+//Dot product of two vectors
+
 #include<mpi.h>
 #include<stdio.h>
 #include<stdlib.h>
-#define VECLEN 100
-
 
 int main(int argc , char* argv[])
 {
     int rank , size;
-    int len = VECLEN;
-    double a[len] , b[len];
+    double a[100] , b[100];
     double mysum , allsum;
 
     MPI_Init(&argc,&argv);
