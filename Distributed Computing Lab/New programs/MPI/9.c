@@ -5,9 +5,10 @@
 #include<stdlib.h>
 #define SEED 35467892
 
-int main(){
+int main()
+{
     int rank , size;
-    long niter = 1000000;
+    long niter = 1000000;   //Number of points
     double x , y , z;
     int count = 0;
 
@@ -22,7 +23,7 @@ int main(){
         for(int i = 0; i < niter; i++ ){
             x = ((double)rand())/RAND_MAX;
             y = ((double)rand())/RAND_MAX;
-            z = sqrt(x*x + y*y);
+            z = x*x + y*y ;
             if(z <= 1){
                 count++;
             }
