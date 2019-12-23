@@ -1,6 +1,8 @@
+//Classification
+
 #include<stdio.h>
-#include<stdlib.h> // or <stdlib.h> rand, srand
-#include<time.h> // or <time.h> time
+#include<stdlib.h> 
+#include<time.h> 
 #include<omp.h>
 #include<math.h>
 #define K 4
