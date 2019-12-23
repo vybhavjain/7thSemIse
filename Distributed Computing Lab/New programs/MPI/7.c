@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include"mpi.h"
+#include<mpi.h>
 #include<string.h>
 #define BUFFER_SIZE 32
 int main(int argc, char* argv[]){
@@ -10,7 +10,7 @@ int main(int argc, char* argv[]){
 	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
 	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
 	if(rank==3){
-		strcpy(msg,"Hello India");
+		strcpy(msg,"Hello");
 		for(temp=0;temp<numprocs;temp++){
 			if(temp!=3){
 				MPI_Send(msg,BUFFER_SIZE,MPI_CHAR,temp,tag,MPI_COMM_WORLD);
