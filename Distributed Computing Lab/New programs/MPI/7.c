@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 	}
 	else
 	{
-		MPI_Recv(msg,BUFFER_SIZE,MPI_CHAR,root,tag,MPI_COMM_WORLD,&status);
+		MPI_Recv(msg,32,MPI_CHAR,root,tag,MPI_COMM_WORLD,&status);
 		printf("\n%s in process with rank %d from process with rank %d\n",msg,rank,root);
 	}
 	MPI_Finalize();
