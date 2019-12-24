@@ -1,4 +1,4 @@
-//Communication amoing two processors
+//Communication among two processors
 
 #include<stdio.h>
 #include<mpi.h>
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]){
 		{
 			if(temp!=3)
 			{
-				MPI_Send(msg,BUFFER_SIZE,MPI_CHAR,temp,tag,MPI_COMM_WORLD);
+				MPI_Send(msg,32,MPI_CHAR,temp,tag,MPI_COMM_WORLD);
 			}
 		}
 	}
