@@ -1,3 +1,5 @@
+//RBG to Black and white
+
 #include <stdio.h>
 #include <gd.h>
 #include <string.h>
@@ -40,6 +42,7 @@ int main() {
 	}
 	
 	double t2 = omp_get_wtime();
+	
 	if((fp=fopen(output_file, "w")) == NULL) {
 	printf("Error opening output file %s\n", output_file);
 	return 1;

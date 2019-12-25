@@ -5,7 +5,7 @@
 #include<time.h>
 #include<mpi.h>
 
-int f(int i)
+int f(int i) //Can be any fuction value
 {
     int value = i * i;       
     return value;
@@ -35,11 +35,10 @@ void main(int argc, char* argv[])
     MPI_Comm_rank(MPI_COMM_WORLD, &id);
     MPI_Comm_size(MPI_COMM_WORLD, &p);
     
-    a=1; b=10000000; c=49;
+    a=1; b=10000000; c=49;  // C should be a perfect square to get a result 
     
-    if(id==0){
+    if(id==0)
         printf("A=%d,\tB=%d,\tC=%d\n",a,b,c);
-    }
     
     wtime=MPI_Wtime();
     j=search(a,b,c,id,p);

@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include<mpi.h>
 #include<sys/time.h>
-#define N 4
+#define N 4 //Size of matrix
 
 MPI_Status status;
 double a[N][N], b[N][N], c[N][N];

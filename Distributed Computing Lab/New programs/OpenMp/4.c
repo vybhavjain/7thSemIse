@@ -5,7 +5,7 @@
 
 void main() 
 {
-	long long fact1 = 1,fact2 = 1;
+	int fact1 = 1,fact2 = 1;
 	int a,i;
 	
 	printf("Enter a number to check its factorial\n");
@@ -18,7 +18,7 @@ void main()
 	}
 
 	printf("When first private is not used\n");
-	printf("factorial of %d is %llu \n",a,fact1);
+	printf("factorial of %d is %d \n",a,fact1);
 	
 	#pragma omp parallel for firstprivate(a,fact2) num_threads(8)
 	for(i = 2; i<=a; i++) 
@@ -27,5 +27,5 @@ void main()
 	}
 
 	printf("When first private is used\n");
-	printf("factorial of %d is %llu \n",a,fact2);
+	printf("factorial of %d is %d \n",a,fact2);
 }
