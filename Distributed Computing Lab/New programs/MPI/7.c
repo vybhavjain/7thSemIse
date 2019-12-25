@@ -1,4 +1,4 @@
-//Communication amoing two processors
+//Communication among two processors
 
 #include<stdio.h>
 #include<mpi.h>
