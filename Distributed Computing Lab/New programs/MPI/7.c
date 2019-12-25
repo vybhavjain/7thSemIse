@@ -18,13 +18,13 @@ int main(int argc, char* argv[]){
 		{
 			if(temp!=3)
 			{
-				MPI_Send(msg,BUFFER_SIZE,MPI_CHAR,temp,tag,MPI_COMM_WORLD);
+				MPI_Send(msg,32,MPI_CHAR,temp,tag,MPI_COMM_WORLD);
 			}
 		}
 	}
 	else
 	{
-		MPI_Recv(msg,BUFFER_SIZE,MPI_CHAR,root,tag,MPI_COMM_WORLD,&status);
+		MPI_Recv(msg,32,MPI_CHAR,root,tag,MPI_COMM_WORLD,&status);
 		printf("\n%s in process with rank %d from process with rank %d\n",msg,rank,root);
 	}
 	MPI_Finalize();

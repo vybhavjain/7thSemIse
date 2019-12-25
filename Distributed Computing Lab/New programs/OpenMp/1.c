@@ -1,83 +1,81 @@
 // MergeSort
-
-#include<omp.h>
 #include<stdio.h>
+#include<omp.h>
 #include<stdlib.h>
-void merge(int* a, int l, int mid, int r)
+
+void merge(int a[] , int x1 , int y1 , int x2 , int y2)
 {
-int n1 = mid-l+1;
-int n2 = r-mid;
-int b[n1], c[n2];
-int k = l;
-int i,j;
-for(i = 0; i<n1; i++)
-b[i] = a[k++];
-for(i = 0; i<n2; i++)
-c[i] = a[k++];
-k = l; 
-i = 0;
-j = 0;
-while(i<n1 & j<n2)
-{
-if(b[i]<c[j])
-{
-a[k++] = b[i++];
+    int p = x1;
+    int q = x2;
+    int k = 0;
+    int temp[1000];
+    while(p <= y1 && q <= y2 ){
+        if(a[p] < a[q])
+        {
+            temp[k++] = a[p++];
+        }
+        else
+        {
+            temp[k++] = a[q++];
+        }
+    }
+
+    while( p <= y1 ){
+        temp[k++] = a[p++];
+    }
+    while( q <= y2 ){
+        temp[k++] = a[q++];
+    }
+
+    for( int i = x1 , j = 0; i <= y2; i++,j++ )
+    {
+        a[i] = temp[j];
+    }
 }
-else
-{
-a[k++] = c[j++];
+
+void mergesort(int a[],int p , int q){
+int mid = 0;
+if( p < q){
+    mid = (p + q)/2;
+    #pragma omp parallel sections
+    {
+        #pragma omp section
+        {
+            printf("Process handing left recursion is %d\n",omp_get_thread_num());
+            mergesort(a,p,mid);
+        }
+        #pragma omp section
+        {
+            printf("Process handing right recursion is %d\n",omp_get_thread_num());
+            mergesort(a,mid+1,q);
+        }
+    }
+    merge(a,p,mid,mid+1,q);
+  }
 }
-}
-while(i<n1)
-a[k++] = b[i++];
-while(j<n2)
-a[k++] = c[j++];
-}
-void mergesort(int* a, int l, int r)
-{
-if(l<r)
-{
-int mid;
-#pragma omp parallel sections
-{
-mid = (l+r)/2;
-#pragma omp section
-{
-mergesort(a, l, mid);
-}
-#pragma omp section
-{
-mergesort(a, mid+1, r);
-}
-}
-merge(a,l,mid,r);
-} 
-}
-int main()
-{
-omp_set_nested(1);
-int start=1;
-int i,j,k;
-printf("\n\nInput Size\t1\t2\t4\t8\t");
-for(i = 0; i<4; i++)
-{
-int size = start*10;
-start = size;
-int a[size];
-for(j = 0; j<size; j++)
-{
-a[j] = rand()%100000;
-}
-printf("\n\n%d\t",size);
-for(k = 0; k<4; k++)
-{
-omp_set_num_threads(2*(k));
-double t1 = omp_get_wtime();
-mergesort(a,0,size-1);
-double t2 = omp_get_wtime();
-printf("%lf\t",t2-t1);
-}
-}
-return 0;
+
+void main(){
+  int n = 0;
+  printf("Enter the number of elements for sorting\n");
+  scanf("%d",&n);
+
+  int a[n];
+  for(int i = 0; i < n; i++ ){
+    a[i] = rand()%100;
+  }
+
+  printf("Unsorted array is\n");
+  for(int i = 0; i < n; i++ ){
+    printf("%d\n",a[i]);
+  }
+
+  double t1 = omp_get_wtime();
+  mergesort(a,0,n-1);
+  double t2 = omp_get_wtime();
+  printf("Sorted array is\n");
+  for(int i = 0; i < n; i++ ){
+    printf("%d\n",a[i]);
+  }
+
 }
 
