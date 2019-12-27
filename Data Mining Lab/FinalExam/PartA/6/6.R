@@ -8,3 +8,7 @@ print(num_attributes)
 print(num_records)
 
 tail(data1, 10)
+
+head(data1$Sepal.Width,5)
+
+plot(density(data1$Petal.Length))
