@@ -1,5 +1,4 @@
 # DC-Lab
-These are the programs for Distributed computing lab.
 
 Executing steps:
 
