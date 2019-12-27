@@ -1,14 +1,6 @@
-## parallel_programming_lab  
+## 7th Semester ISE
 
-> Command to execute Openmp programs:
+Repositery of codes for labs -->
 
-```
-$ gcc -fopenmp <file>.c  
-$ ./a.out  
-```
-> Command to execute MPI programs:
-
-```
-$ mpicc <file>.c
-$ mpirun -np 4 ./a.out
-```
+### 1) Data Mining Laboratory
+### 2) Distributed Computing Laboratory
