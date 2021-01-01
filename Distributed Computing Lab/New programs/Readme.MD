@@ -9,6 +9,8 @@ gcc <filename>.c -fopenmp
 ./a.out
 ```
 
+You may additionally need to reconfigure your GCC installation to include openmp binaries.
+
 B) For mpi programs
 
 ```
