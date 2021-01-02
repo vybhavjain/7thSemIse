@@ -2,18 +2,34 @@
 
 Executing steps:
 
-A) For openmp programs 
+A) For OpenMp programs 
 
+Get necessary packages (one time step):
+
+```bash
+sudo apt-get install libopenmpi-dev libgd-dev
 ```
-gcc <filename>.c -fopenmp
+
+To compile and run codes:
+
+```bash
+gcc <filename>.c -fopenmp -lgd
 ./a.out
 ```
 
-You may additionally need to reconfigure your GCC installation to include openmp binaries.
+B) For MPI programs
 
-B) For mpi programs
+Get necessary packages (one time step):
 
+```bash
+sudo apt-get install mpich mpich-doc
 ```
-mpicc <filename>.c -o <filename>
-mpirun -np 4 ./<filename>
+
+To compile and run codes:
+
+```bash
+mpicc <filename>.c
+mpirun ./a.out -np 4 
+#try mpiexec if mpirun does not work
+#try with -np 2 if 4 does not work 
 ```
