@@ -1,7 +1,7 @@
 
 #uncomment the following two lines to install the packages if not present
-#install.packages("arules")
-#install.packages("arulesViz")
+# install.packages("arules")
+# install.packages("arulesViz")
 
 #attach the packages
 library(arules)
