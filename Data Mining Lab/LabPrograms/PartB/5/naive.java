@@ -6,7 +6,7 @@ class temp
 	String q,r;
 }
 
-class naive
+public class naive
 {
 public static double probability(ArrayList<temp> al,String x) 
 {

@@ -13,7 +13,7 @@ class comp
 	}
 }
 
-class prog6
+public class prog10
 {
 	public static void main(String args[]) throws FileNotFoundException, IOException
 	{

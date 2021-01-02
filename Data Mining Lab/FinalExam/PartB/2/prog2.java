@@ -1,7 +1,7 @@
 //Linear Regression --> y=mx+b;
 import java.util.*;
 
-class prog8
+public class prog2
 {
 	public static void main(String args[])
 	{

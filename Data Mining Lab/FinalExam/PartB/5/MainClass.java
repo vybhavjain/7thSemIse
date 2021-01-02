@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-
 public class MainClass {
 	
 	Scanner in=new Scanner(System.in);
@@ -27,8 +26,6 @@ public class MainClass {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public void missingString(int col, String defValue) {
@@ -51,8 +48,6 @@ public class MainClass {
 				row[col]=maxValName;
 			}
 		}
-		
-		
 	}
 	
 	public void missingInteger(int col, String defValue) {
@@ -95,10 +90,8 @@ public class MainClass {
 	public static void main(String[] args) {
 		MainClass mc=new MainClass();
 		mc.loadFile("input.csv");
-		mc.missingString(5, "NA");
+		// mc.missingString(5, "NA");
 		mc.missingInteger(1, "NA");
 		mc.generateFile();
-		
 	}
-
 }

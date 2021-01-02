@@ -5,7 +5,7 @@ import java.io.*;
 class temp{
 	double x,y,z;
 }
-class prog7
+public class prog11
 {
 	public static void main(String args[]) throws FileNotFoundException, IOException
 	{

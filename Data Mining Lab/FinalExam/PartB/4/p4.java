@@ -3,7 +3,7 @@
 import java.io.*; 
 import java.util.*;
 
-class p3 {
+public class p4 {
 	static boolean check(String x1,String x2) {
 		x2 = x2.replace("", ".*");
 		if(x1.matches(x2))

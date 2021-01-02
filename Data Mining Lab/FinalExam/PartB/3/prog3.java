@@ -6,7 +6,7 @@ class Records
       int index,attr1;
       String attr2;
 }
-public class prog1
+public class prog3
 {
 	static Records[] rc=new Records[10];
 	public static void main(String args[]) throws FileNotFoundException,IOException
