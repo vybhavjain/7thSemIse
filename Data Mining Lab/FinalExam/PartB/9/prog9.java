@@ -6,7 +6,7 @@ class record
 {
 	double attr1=0,attr2=0; 
 }
-class prog9
+public class prog9
 {
 	public static record calc(ArrayList<record> bl) {
 	     record a = new record();
