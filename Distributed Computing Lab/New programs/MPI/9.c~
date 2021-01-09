@@ -55,7 +55,7 @@ int main(int argc , char* argv[])
        }
 
        double pi = ((double) finalcount/(double) finalniter) * 4.0;
-       printf("\nThe value of pi is %f\n",pi);
+       printf("\nThe value of pi is %f",pi);
    }
 
    MPI_Finalize();

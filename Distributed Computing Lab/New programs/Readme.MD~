@@ -23,7 +23,6 @@ Get necessary packages (one time step):
 
 ```bash
 sudo apt-get install mpich mpich-doc
-sudo update-alternatives --config mpi
 ```
 
 To compile and run codes:
