@@ -1,35 +1,18 @@
-library(rpart)	#for decision tree1
-library(rpart.plot)	#graph for decision tree1
-library(e1071)	#for naive Bayes classifier
-library(party)	#for decision tree2
-library(caret)	#for confusionMatrix
+library("rCBA")
+data("iris")
+iris
+train <- sapply(iris,as.factor)
+train <- data.frame(train, check.names=FALSE)
+txns <- as(train,"transactions")
 
-data <- iris
+rules = rCBA::fpgrowth(txns, support=0.03, confidence=0.03, maxLength=2, consequent="Species",
+           parallel=FALSE)
 
-#split data for training and testing
-index <- sample(2,nrow(data),replace=TRUE,p=c(0.7,0.3))
-trainData <- data[index==1,]
-testData <- data[index==2,]
+predictions <- rCBA::classification(train,rules)
+table(predictions)
+sum(as.character(train$Species)==as.character(predictions),na.rm=TRUE)/length(predictions)
 
-#Y vs X
-features <- Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width
-
-#Decision Tree
-tree1 <- rpart(features,trainData,method="class")
-rpart.plot(tree1)
-
-tree2 <- ctree(features,trainData)
-plot(tree2)
-
-#Decision Tree Prediction
-res1 <- predict(tree2,testData)
-confusionMatrix(res1,testData$Species)
-
-
-#Naive Bayes
-model1 <- naiveBayes(features,trainData)
-print(model1)
-
-#Naive Bayes Prediction
-res2 <- predict(model1,testData)
-confusionMatrix(res2,testData$Species)
+prunedRules <- rCBA::pruning(train, rules, method="m2cba", parallel=FALSE)
+predictions <- rCBA::classification(train, prunedRules)
+table(predictions)
+sum(as.character(train$Species)==as.character(predictions),na.rm=TRUE)/length(predictions)

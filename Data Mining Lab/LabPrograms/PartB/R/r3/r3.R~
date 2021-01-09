@@ -8,7 +8,6 @@ library(arules)
 library(arulesViz)
 
 #load the Groceries dataset
-Groceries <- read.csv("Groceries.csv")
 data(Groceries)
 
 #display the first 10 transactions
