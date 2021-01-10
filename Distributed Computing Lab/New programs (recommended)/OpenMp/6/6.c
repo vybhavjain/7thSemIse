@@ -1,5 +1,3 @@
-//RBG to Black and white
-
 #include <stdio.h>
 #include <gd.h>
 #include <string.h>
@@ -23,29 +21,29 @@ int main() {
 	gdImagePtr img = gdImageCreateFromPng(fp);
 	int width = gdImageSX(img);
 	int height = gdImageSY(img);
+	int combined;
 	double t1 = omp_get_wtime();
 	
-	#pragma omp parallel for private(y, color, red, green, blue) num_threads(num_threads)
+	#pragma omp parallel for private(y, color, red, green, blue, combined)
 	for(x=0; x<width; x++) {
 	    #pragma omp critical
 	    {
 			for(y=0; y<height; y++) {
-				color = x + 0;
 				color = gdImageGetPixel(img, x, y);
-				red   = 255 - gdImageRed(img, color);
-				green = 255 - gdImageGreen(img, color);
-				blue  = 255 - gdImageBlue(img, color);
-				color = gdImageColorAllocate(img, red, green, blue);
+				red   = gdImageRed(img, color);
+				green = gdImageGreen(img, color);
+				blue  = gdImageBlue(img, color);
+				combined = 0.3*red + 0.59*green + 0.11*blue;
+				color = gdImageColorAllocate(img, combined, combined, combined);
 				gdImageSetPixel(img, x, y, color);
 	        }
 	    }
 	}
-	
 	double t2 = omp_get_wtime();
 	
 	if((fp=fopen(output_file, "w")) == NULL) {
-	printf("Error opening output file %s\n", output_file);
-	return 1;
+		printf("Error opening output file %s\n", output_file);
+		return 1;
 	}
 	gdImagePng(img, fp);
 	gdImageDestroy(img);
