@@ -1,56 +1,47 @@
-// Multitasking
-
 #include<omp.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+
 double sines[1000];
 int primes[1000];
 
- void prime_table ( int prime_num )
+void prime_table(int prime_num)
 {
-  int i,j,p,prime;
+  int i, j, p, prime;
   i = 2;
   p = 0;
   while ( p <prime_num )
   {
     prime = 1;
     for ( j = 2; j <i; j++ )
-    {
       if ( ( i % j ) == 0 )
       {
         prime = 0;
         break;
       }
-    }      
     if ( prime )
     {
       primes[p] = i;
-      p = p + 1;
+      p++;
     }
-    i = i + 1;
+    i++;
   }
 }
 
-void sine_table ( int sine_num )
+void sine_table(int sine_num)
 {
   int i,j;
-  double a,pi = 3.141592653589793;
-  for ( i = 0; i<sine_num; i++ )
-  {
-    sines[i] = 0.0;
-    for ( j = 0; j <= i; j++ )
-    {
-      a = ( double ) ( j ) * pi / ( double ) ( sine_num - 1 );
-      sines[i] = sines[i] + sin ( a );
-    }
-  }
+  double a;
+  for (i = 0; i<sine_num; i++)
+    sines[i] = sin(i*M_PI/180);
 }
+  
 
-void main(){
-	int size,z,y;
+int main(){
+	int size, z, y;
 	printf("Enter the the number of primes and sine table values required : \n");
-	scanf("%d",&size);
+	scanf("%d", &size);
 	#pragma omp parallel sections
 	{
 		#pragma omp section
@@ -68,4 +59,5 @@ void main(){
 			}
 		}
 	}
+  return 0;
 }

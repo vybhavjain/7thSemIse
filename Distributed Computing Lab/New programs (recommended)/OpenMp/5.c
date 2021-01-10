@@ -1,11 +1,10 @@
-//Classification
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<omp.h>
 #include<time.h>
 #include<math.h>
 #include<float.h>
+
 #define K 4
 
 int num_threads;
@@ -15,7 +14,7 @@ int cluster[K][2]={{75,25},{25,25},{25,75},{75,75}};
 
 void populate_points(){
     long i;
-    #pragma omp parallel for num_threads(num_threads)
+    #pragma omp parallel
     for(i=0;i<num_points;i++){
         datapoints[i][0]=rand()%100;
         datapoints[i][1]=rand()%100;
@@ -25,14 +24,14 @@ void populate_points(){
         cluster_count[i]=0;
 }
 
-double get_distance(int x1,int y1, int x2, int y2){
+double get_distance(int x1, int y1, int x2, int y2) {
     int dx=x2-x1,dy=y2-y1;
     return ((double)sqrt(dx*dx+dy*dy));
 }
 
-void classify_points(){
-    long i; int j; int cluster_index; double cur_dist=0,min_dist=999;
-    #pragma omp parallel for num_threads(num_threads) private(cluster_index, j , i, cur_dist,min_dist)
+void classify_points() {
+    long i; int j, cluster_index; double cur_dist=0, min_dist=999;
+    #pragma omp parallel for private(cluster_index, j , i, cur_dist, min_dist)
     for(i=0;i<num_points;i++){
         cluster_index=-1;
         cur_dist=0,min_dist=999;
@@ -51,9 +50,8 @@ void classify_points(){
 
 void main(){
     printf("Max threads:%d\n",omp_get_max_threads());
-    printf("Enter number of points followed by number of threads");
+    printf("Enter number of points:");
     scanf("%ld",&num_points);
-    scanf("%d",&num_threads);
     populate_points();
     double t1=omp_get_wtime();
     classify_points();
