@@ -33,7 +33,7 @@ To compile and run codes:
 
 ```bash
 mpicc <filename>.c
-mpirun ./a.out -np 4 
+mpirun -np 4 ./a.out 
 #try mpiexec if mpirun does not work
 #try with -np 2 if 4 does not work 
 ```
