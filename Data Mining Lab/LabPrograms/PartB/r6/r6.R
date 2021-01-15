@@ -1,5 +1,6 @@
 library("MASS")
 library("survival")
+library("ipred")
 
 # Classification: Breast Cancer data
 
