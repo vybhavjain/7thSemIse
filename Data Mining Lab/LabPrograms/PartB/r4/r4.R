@@ -1,12 +1,10 @@
 library("rCBA")
-data("iris")
-iris
-train <- sapply(iris,as.factor)
-train <- data.frame(train, check.names=FALSE)
+data <- iris
+
+train <- data.frame(sapply(iris))
 txns <- as(train,"transactions")
 
-rules = rCBA::fpgrowth(txns, support=0.03, confidence=0.03, maxLength=2, consequent="Species",
-           parallel=FALSE)
+rules = rCBA::fpgrowth(txns, support=0.03, confidence=0.03, maxLength=2, consequent="Species")
 
 predictions <- rCBA::classification(train,rules)
 table(predictions)

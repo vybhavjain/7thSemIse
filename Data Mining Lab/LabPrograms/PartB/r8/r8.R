@@ -2,10 +2,7 @@
 data(iris) 
 
 # Structure 
-str(iris) 
-
-# Installing Packages 
-install.packages("fpc") 
+str(iris)
 
 # Loading package 
 library(fpc) 
