@@ -10,6 +10,8 @@ Repository of codes for labs:
 Get necessary packages (one time step):
 
 ```bash
+sudo apt-get update
+audo apt-get upgrade
 sudo apt-get install libopenmpi-dev libgd-dev
 ```
 
