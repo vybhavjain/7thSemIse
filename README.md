@@ -54,5 +54,3 @@ To compile and run codes:
 $ R -f <file>.R
 ```
 Alternatively, you may choose to run the R codes in R Studio.
-
-For part B in python, please head over here: [https://github.com/KritikaChoudhary/DM-Lab](https://github.com/KritikaChoudhary/DM-Lab)
