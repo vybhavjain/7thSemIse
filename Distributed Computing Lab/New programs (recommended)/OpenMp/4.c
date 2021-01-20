@@ -3,7 +3,7 @@
 
 void main() 
 {
-	int fact1 = 1,fact2 = 1,a,i;
+	int fact1 = 1,fact2 = 1, a, i;
 	
 	printf("Enter a number to check its factorial\n");
 	scanf("%d",&a);
