@@ -1,5 +1,3 @@
-//Communication Among processors
-
 #include<stdio.h>
 #include<mpi.h>
 #include<string.h>

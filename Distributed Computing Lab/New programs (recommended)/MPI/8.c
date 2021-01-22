@@ -1,5 +1,3 @@
-//Dot product of two vectors
-
 #include<mpi.h>
 #include<stdio.h>
 #include<stdlib.h>

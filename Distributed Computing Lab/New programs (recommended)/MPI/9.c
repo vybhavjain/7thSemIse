@@ -1,62 +1,31 @@
-//Monto Carlo algorithm
+#include <stdlib.h>
+#include <stdio.h>
+#include <mpi.h>
+#include <math.h>
 
-#include<stdio.h>
-#include<mpi.h>
-#include<stdlib.h>
-#define SEED 35467892
+#define SEED 12345678
+#define N 100000
 
-int main(int argc , char* argv[])
-{
-    int rank , size;
-    long niter = 1000000;   //Number of points used, higher points = more accurate value of pi
-    double x , y , z;
-    int count = 0, i,j;
+int main(){
+  int rank, size;
+  double x,y,z,val=0,count=0;
 
-    MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD,&rank);
-    MPI_Comm_size(MPI_COMM_WORLD,&size);
+  MPI_Init(NULL,NULL);
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    int recieved[size];
-    int recvniter[size];
-    srand(SEED+rank);
-    if(rank != 0 )
-	{
-        for(i = 0; i < niter; i++ )
-		{
-            x = ((double)rand())/RAND_MAX;  // To make sure the value is between 0 and 1
-            y = ((double)rand())/RAND_MAX;  // To make sure the value is between 0 and 1
-            z = x*x + y*y ;
-            if(z <= 1)
-                count++;
-        }
-        for(j = 0; j < size; j++ )
-		{
-            MPI_Send(&count,1,MPI_INT,0,1,MPI_COMM_WORLD);
-            MPI_Send(&niter,1,MPI_LONG,0,2,MPI_COMM_WORLD);
-        }
+  srand(SEED+rank);
+  for(int i=0;i<N;i++){
+    x=(double)rand()/RAND_MAX;
+    y=(double)rand()/RAND_MAX;
+    z=x*x+y*y;
+    if(z<=1){
+      count++;
     }
-    else if( rank == 0 ) 
-	{
-        for(i = 0; i < size; i++ )
-		{
-            MPI_Recv(&recieved[i],size,MPI_INT,MPI_ANY_SOURCE,1,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-            MPI_Recv(&recvniter[i],size,MPI_LONG,MPI_ANY_SOURCE,2,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        }
-    }
-   if( rank == 0 )
-   {
-       int finalcount = 0;
-       long finalniter = 0;
-
-       for(i = 0; i < size; i++ )
-	   {
-           finalcount += recieved[i];
-           finalniter += recvniter[i];
-       }
-
-       double pi = ((double) finalcount/(double) finalniter) * 4.0;
-       printf("\nThe value of pi is %f\n",pi);
-   }
-
-   MPI_Finalize();
+  }
+  MPI_Reduce(&count, &val,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD);
+  if(rank==0){
+    printf("PI:%lf\t",val/N);
+  }
+  MPI_Finalize();
+  return 0;
 }
